@@ -8,15 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import javax.annotation.processing.FilerException;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.ResourcePatternUtils;
 
 
 
@@ -102,26 +99,19 @@ public class ConfigurationTransformer {
 		transformer.put("output", convertJsonToMap(json.getJsonArray("output")));
 		map.put(name, transformer);
 	}
-	public void initializeFromDir(String directory) throws FilerException {
+	
+	public void initializeFromDir(String directory) throws FileNotFoundException {
 		
 		// Cameron code from MPI-E
-	    Resource[] resources =
-	            ResourcePatternUtils.getResourcePatternResolver(resourceLoader)
-	                .getResources("classpath*:" + env + "/*.json");
-	        for (Resource resource : resources) {
-	          String fileName = resource.getFilename();
-	          if (fileName.endsWith(".json")) {
-	            final String clientName = StringUtils.removeEnd(fileName, ".json");
-	            final String path = "/" + env + "/" + fileName;
+//	    Resource[] resources =
+//	            ResourcePatternUtils.getResourcePatternResolver(resourceLoader)
+//	                .getResources("classpath*:" + env + "/*.json");
+//	        for (Resource resource : resources) {
+//	          String fileName = resource.getFilename();
+//	          if (fileName.endsWith(".json")) {
+//	            final String clientName = StringUtils.removeEnd(fileName, ".json");
+//	            final String path = "/" + env + "/" + fileName;
 
-	            
-	            
-	            
-	            
-		
-		
-		
-		
 		// First cut, use above instead.
 		File dir = new File(directory);
 		  File[] directoryListing = dir.listFiles();
@@ -135,7 +125,7 @@ public class ConfigurationTransformer {
 			  StringBuilder error = new StringBuilder();
 			  error.append("Can only initialize given a directory of json files.");
 			  error.append("Value ["+directory+"] is not a directory.");
-			  throw new FilerException(error.toString());
+			  throw new FileNotFoundException(error.toString());
 		  }
 	}
 

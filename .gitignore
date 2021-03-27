@@ -25,6 +25,7 @@
 /.nb-gradle/
 
 target/
+bin/
 
 secrets.conf
 *.pem

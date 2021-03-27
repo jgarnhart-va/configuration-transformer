@@ -1,37 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>gov.va.api.health</groupId>
+    <artifactId>health-apis-parent</artifactId>
+    <version>7.0.23</version>
+    <relativePath/>
+  </parent>
   <groupId>gov.va.vecms</groupId>
   <artifactId>configuration-transformer</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <name>configuration-transformer</name>
   <description>Maps a specific key, value set to another.</description>
-  <dependencies>
-  <dependency>
-    <groupId>javax.json</groupId>
-    <artifactId>javax.json-api</artifactId>
-    <version>1.1.4</version>
-  </dependency>
-<dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-lang3</artifactId>
-    <version>3.12.0</version>
-</dependency>
-  <dependency>
-	<groupId>org.projectlombok</groupId>
-	<artifactId>lombok</artifactId>
-	<version>0.11.4</version>
-</dependency>
+  <properties>
+    <docker.organization>vasviews</docker.organization>
+    <docker.imageName>configuration-transformer</docker.imageName>
+    <git.enforceBranchNames>false</git.enforceBranchNames>
+    <jacoco.coverage>0.0</jacoco.coverage>
+    <junit.version>4.12</junit.version>
+    <javax.version>1.1.4</javax.version>
+    <commons.lang.version>3.12.0</commons.lang.version>
+    <lombok.version>0.11.4</lombok.version>
+  </properties>
   
+  <packaging>jar</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>javax.json</groupId>
+      <artifactId>javax.json-api</artifactId>
+      <version>${java.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons.lang.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+    </dependency>
   </dependencies>
-  <build>
-    <sourceDirectory>src</sourceDirectory>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
-        <configuration>
-          <release>13</release>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+  <distributionManagement>
+    <repository>
+      <id>dip-nexus-vecms-releases</id>
+      <url>https://cicd.is.dtc.va.gov/nexus/repository/vecms-releases/</url>
+    </repository>
+  </distributionManagement>
 </project>
